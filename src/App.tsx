@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/context/ThemeContext";
 import { AuthProvider, useAuth } from "@/context/AuthContext";
 import { MainLayout } from "@/layouts/MainLayout";
 import { AuthLayout } from "@/layouts/AuthLayout";
+import { AdminLayout } from "@/layouts/AdminLayout";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -16,6 +17,8 @@ import CreateProject from "./pages/CreateProject";
 import Profile from "./pages/Profile";
 import Events from "./pages/Events";
 import Invitations from "./pages/Invitations";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminPlaceholder from "./pages/admin/AdminPlaceholder";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -40,6 +43,17 @@ const AppRoutes = () => (
       <Route path="/profile/:id" element={<Profile />} />
       <Route path="/events" element={<Events />} />
       <Route path="/invitations" element={<Invitations />} />
+    </Route>
+    <Route path="/admin" element={<AdminLayout />}>
+      <Route index element={<AdminDashboard />} />
+      <Route path="analytics" element={<AdminPlaceholder />} />
+      <Route path="users" element={<AdminPlaceholder />} />
+      <Route path="projects" element={<AdminPlaceholder />} />
+      <Route path="institutions" element={<AdminPlaceholder />} />
+      <Route path="events" element={<AdminPlaceholder />} />
+      <Route path="categories" element={<AdminPlaceholder />} />
+      <Route path="rankings" element={<AdminPlaceholder />} />
+      <Route path="settings" element={<AdminPlaceholder />} />
     </Route>
     <Route path="*" element={<NotFound />} />
   </Routes>
