@@ -22,7 +22,7 @@ const Profile = () => {
             <h1 className="font-display text-2xl font-bold text-foreground">{user.name}</h1>
             <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 mt-2 text-sm text-muted-foreground">
               <span className="flex items-center gap-1"><Building2 size={14} />{user.institution}</span>
-              <span className="flex items-center gap-1"><GraduationCap size={14} />{user.course}</span>
+              {user.course && <span className="flex items-center gap-1"><GraduationCap size={14} />{user.course}</span>}
             </div>
             {user.bio && <p className="mt-3 text-sm text-muted-foreground">{user.bio}</p>}
             <div className="mt-4">

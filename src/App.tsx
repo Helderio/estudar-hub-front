@@ -17,6 +17,8 @@ import CreateProject from "./pages/CreateProject";
 import Profile from "./pages/Profile";
 import Events from "./pages/Events";
 import Invitations from "./pages/Invitations";
+import Institutions from "./pages/Institutions";
+import InstitutionDetails from "./pages/InstitutionDetails";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminPlaceholder from "./pages/admin/AdminPlaceholder";
 import NotFound from "./pages/NotFound";
@@ -43,6 +45,8 @@ const AppRoutes = () => (
       <Route path="/profile/:id" element={<Profile />} />
       <Route path="/events" element={<Events />} />
       <Route path="/invitations" element={<Invitations />} />
+      <Route path="/institutions" element={<Institutions />} />
+      <Route path="/institutions/:id" element={<InstitutionDetails />} />
     </Route>
     <Route path="/admin" element={<AdminLayout />}>
       <Route index element={<AdminDashboard />} />
