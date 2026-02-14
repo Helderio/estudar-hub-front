@@ -29,7 +29,7 @@ export const UserCard = ({ user, compact = false }: UserCardProps) => {
           {user.name.charAt(0)}
         </div>
         <h4 className="font-display font-semibold text-card-foreground">{user.name}</h4>
-        <p className="text-xs text-muted-foreground mt-1">{user.institution} · {user.course}</p>
+        <p className="text-xs text-muted-foreground mt-1">{user.institution}{user.course ? ` · ${user.course}` : ''}</p>
         <div className="mt-3">
           <RankBadge rank={user.rank} size="sm" />
         </div>

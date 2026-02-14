@@ -14,6 +14,7 @@ export const Navbar = () => {
   const navLinks = [
     { to: '/dashboard', label: 'Projetos' },
     { to: '/events', label: 'Eventos' },
+    { to: '/institutions', label: 'Instituições' },
   ];
 
   return (
