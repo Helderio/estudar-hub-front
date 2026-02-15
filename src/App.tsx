@@ -15,10 +15,13 @@ import Dashboard from "./pages/Dashboard";
 import ProjectDetails from "./pages/ProjectDetails";
 import CreateProject from "./pages/CreateProject";
 import Profile from "./pages/Profile";
+import EditProfile from "./pages/EditProfile";
 import Events from "./pages/Events";
+import CreateEvent from "./pages/CreateEvent";
 import Invitations from "./pages/Invitations";
 import Institutions from "./pages/Institutions";
 import InstitutionDetails from "./pages/InstitutionDetails";
+import Chat from "./pages/Chat";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminPlaceholder from "./pages/admin/AdminPlaceholder";
 import NotFound from "./pages/NotFound";
@@ -43,10 +46,13 @@ const AppRoutes = () => (
       <Route path="/projects/:id" element={<ProjectDetails />} />
       <Route path="/create-project" element={<CreateProject />} />
       <Route path="/profile/:id" element={<Profile />} />
+      <Route path="/edit-profile" element={<EditProfile />} />
       <Route path="/events" element={<Events />} />
+      <Route path="/create-event" element={<CreateEvent />} />
       <Route path="/invitations" element={<Invitations />} />
       <Route path="/institutions" element={<Institutions />} />
       <Route path="/institutions/:id" element={<InstitutionDetails />} />
+      <Route path="/chat" element={<Chat />} />
     </Route>
     <Route path="/admin" element={<AdminLayout />}>
       <Route index element={<AdminDashboard />} />

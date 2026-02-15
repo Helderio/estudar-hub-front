@@ -30,17 +30,17 @@ const Dashboard = () => {
     <div className="space-y-6 animate-fade-in">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="font-display text-2xl font-bold text-foreground">Projetos</h1>
-          <p className="text-sm text-muted-foreground">Explore projetos acadêmicos da comunidade.</p>
+          <h1 className="font-display text-2xl font-bold text-foreground">Projectos</h1>
+          <p className="text-sm text-muted-foreground">Explore projectos académicos da comunidade.</p>
         </div>
         <Link to="/create-project" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl gradient-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity">
-          <Plus size={16} /> Criar Projeto
+          <Plus size={16} /> Criar Projecto
         </Link>
       </div>
 
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="flex-1">
-          <SearchBar value={search} onChange={setSearch} placeholder="Pesquisar projetos..." />
+          <SearchBar value={search} onChange={setSearch} placeholder="Pesquisar projectos..." />
         </div>
         <button onClick={() => setShowFilters(!showFilters)} className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-border text-sm font-medium text-foreground hover:bg-muted/50 transition-colors sm:w-auto">
           <SlidersHorizontal size={16} /> Filtros
@@ -77,7 +77,7 @@ const Dashboard = () => {
           {filtered.map(p => <ProjectCard key={p.id} project={p} />)}
         </div>
       ) : (
-        <EmptyState title="Nenhum projeto encontrado" description="Tente ajustar seus filtros ou crie um novo projeto." />
+        <EmptyState title="Nenhum projecto encontrado" description="Tente ajustar os filtros ou crie um novo projecto." />
       )}
     </div>
   );

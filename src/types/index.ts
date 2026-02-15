@@ -1,12 +1,12 @@
 export type Rank = 'E' | 'D' | 'C' | 'B' | 'A' | 'S';
 
 export const RANK_INFO: Record<Rank, { label: string; description: string }> = {
-  E: { label: 'Muito Simples', description: 'Projetos introdutórios e exercícios básicos' },
-  D: { label: 'Simples', description: 'Projetos com escopo pequeno e baixa complexidade' },
-  C: { label: 'Médio', description: 'Projetos com complexidade moderada e múltiplas funcionalidades' },
-  B: { label: 'Avançado', description: 'Projetos robustos com arquitetura complexa' },
+  E: { label: 'Muito Simples', description: 'Projectos introdutórios e exercícios básicos' },
+  D: { label: 'Simples', description: 'Projectos com escopo pequeno e baixa complexidade' },
+  C: { label: 'Médio', description: 'Projectos com complexidade moderada e múltiplas funcionalidades' },
+  B: { label: 'Avançado', description: 'Projectos robustos com arquitectura complexa' },
   A: { label: 'TCC', description: 'Trabalhos de conclusão de curso com fundamentação teórica' },
-  S: { label: 'Pesquisa Científica', description: 'Pesquisa acadêmica com contribuição original ao conhecimento' },
+  S: { label: 'Pesquisa Científica', description: 'Pesquisa académica com contribuição original ao conhecimento' },
 };
 
 export interface Institution {
@@ -34,6 +34,11 @@ export interface User {
   projectCount: number;
   eventCount: number;
   bio?: string;
+  github?: string;
+  linkedin?: string;
+  year?: string;
+  userType?: 'student' | 'professor';
+  interestArea?: string;
   created_at?: string;
 }
 
@@ -61,7 +66,6 @@ export interface Project {
   participants: User[];
   createdAt: string;
   comments: Comment[];
-  // API fields
   titulo?: string;
   descricao?: string;
   capa?: string;
@@ -95,7 +99,6 @@ export interface UniversityEvent {
   institution: string;
   participants: User[];
   status: 'open' | 'closed';
-  // API fields
   titulo?: string;
   descricao?: string;
   data_inicio?: string;

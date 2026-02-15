@@ -14,7 +14,7 @@ export const AuthLayout = () => {
           <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center">
             <BookOpen size={18} className="text-primary-foreground" />
           </div>
-          <span className="font-display font-bold text-lg text-foreground">Estudar Hub</span>
+          <span className="font-display font-bold text-lg text-foreground">EstudarHub</span>
         </Link>
         <button onClick={toggleTheme} className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors">
           {isDark ? <Sun size={18} /> : <Moon size={18} />}

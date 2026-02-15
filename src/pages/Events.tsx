@@ -1,10 +1,12 @@
 import { useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { mockEvents } from '@/data/mockData';
 import { EventCard } from '@/components/EventCard';
 import { SearchBar } from '@/components/SearchBar';
 import { EmptyState } from '@/components/EmptyState';
 import { EVENT_TYPES } from '@/types';
 import type { EventType } from '@/types';
+import { Plus } from 'lucide-react';
 
 const typeKeys = Object.keys(EVENT_TYPES) as EventType[];
 
@@ -12,21 +14,30 @@ const Events = () => {
   const [search, setSearch] = useState('');
   const [selectedType, setSelectedType] = useState<EventType | null>(null);
   const [selectedStatus, setSelectedStatus] = useState<'open' | 'closed' | null>(null);
+  const [selectedInstitution, setSelectedInstitution] = useState<string | null>(null);
+
+  const institutions = useMemo(() => [...new Set(mockEvents.map(e => e.institution))], []);
 
   const filtered = useMemo(() => {
     return mockEvents.filter(e => {
       if (search && !e.title.toLowerCase().includes(search.toLowerCase())) return false;
       if (selectedType && e.type !== selectedType) return false;
       if (selectedStatus && e.status !== selectedStatus) return false;
+      if (selectedInstitution && e.institution !== selectedInstitution) return false;
       return true;
     });
-  }, [search, selectedType, selectedStatus]);
+  }, [search, selectedType, selectedStatus, selectedInstitution]);
 
   return (
     <div className="space-y-6 animate-fade-in">
-      <div>
-        <h1 className="font-display text-2xl font-bold text-foreground">Eventos Universitários</h1>
-        <p className="text-sm text-muted-foreground">Descubra eventos acadêmicos da sua região.</p>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <h1 className="font-display text-2xl font-bold text-foreground">Eventos</h1>
+          <p className="text-sm text-muted-foreground">Descubra eventos académicos em Benguela.</p>
+        </div>
+        <Link to="/create-event" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl gradient-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity">
+          <Plus size={16} /> Criar Evento
+        </Link>
       </div>
 
       <SearchBar value={search} onChange={setSearch} placeholder="Pesquisar eventos..." />
@@ -37,8 +48,17 @@ const Events = () => {
           <button key={t} onClick={() => setSelectedType(t === selectedType ? null : t)} className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${selectedType === t ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:text-foreground'}`}>{EVENT_TYPES[t]}</button>
         ))}
         <div className="w-px bg-border mx-1" />
-        <button onClick={() => setSelectedStatus(selectedStatus === 'open' ? null : 'open')} className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${selectedStatus === 'open' ? 'bg-rank-e/20 text-rank-e' : 'bg-muted text-muted-foreground hover:text-foreground'}`}>Abertos</button>
+        <button onClick={() => setSelectedStatus(selectedStatus === 'open' ? null : 'open')} className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${selectedStatus === 'open' ? 'bg-success/20 text-success' : 'bg-muted text-muted-foreground hover:text-foreground'}`}>Abertos</button>
         <button onClick={() => setSelectedStatus(selectedStatus === 'closed' ? null : 'closed')} className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${selectedStatus === 'closed' ? 'bg-destructive/20 text-destructive' : 'bg-muted text-muted-foreground hover:text-foreground'}`}>Encerrados</button>
+      </div>
+
+      {/* Institution filter */}
+      <div className="flex flex-wrap gap-2">
+        <span className="text-xs text-muted-foreground self-center mr-1">Instituição:</span>
+        <button onClick={() => setSelectedInstitution(null)} className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${!selectedInstitution ? 'bg-primary/10 text-primary' : 'bg-muted text-muted-foreground hover:text-foreground'}`}>Todas</button>
+        {institutions.map(i => (
+          <button key={i} onClick={() => setSelectedInstitution(i === selectedInstitution ? null : i)} className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${selectedInstitution === i ? 'bg-primary/10 text-primary' : 'bg-muted text-muted-foreground hover:text-foreground'}`}>{i}</button>
+        ))}
       </div>
 
       {filtered.length > 0 ? (
@@ -46,7 +66,7 @@ const Events = () => {
           {filtered.map(e => <EventCard key={e.id} event={e} />)}
         </div>
       ) : (
-        <EmptyState title="Nenhum evento encontrado" description="Tente ajustar seus filtros." />
+        <EmptyState title="Nenhum evento encontrado" description="Tente ajustar os filtros." />
       )}
     </div>
   );
