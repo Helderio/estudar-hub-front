@@ -12,9 +12,10 @@ export const Navbar = () => {
   const location = useLocation();
 
   const navLinks = [
-    { to: '/dashboard', label: 'Projetos' },
+    { to: '/dashboard', label: 'Projectos' },
     { to: '/events', label: 'Eventos' },
     { to: '/institutions', label: 'Instituições' },
+    { to: '/chat', label: 'Chat' },
   ];
 
   return (
@@ -26,7 +27,7 @@ export const Navbar = () => {
             <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center">
               <BookOpen size={18} className="text-primary-foreground" />
             </div>
-            <span className="font-display font-bold text-lg text-foreground">Estudar Hub</span>
+            <span className="font-display font-bold text-lg text-foreground">EstudarHub</span>
           </Link>
 
           {/* Desktop nav */}
@@ -101,18 +102,11 @@ export const Navbar = () => {
             {isAuthenticated ? (
               <>
                 {navLinks.map(link => (
-                  <Link
-                    key={link.to}
-                    to={link.to}
-                    onClick={() => setMobileOpen(false)}
-                    className={`block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                      location.pathname.startsWith(link.to) ? 'bg-primary/10 text-primary' : 'text-muted-foreground'
-                    }`}
-                  >
+                  <Link key={link.to} to={link.to} onClick={() => setMobileOpen(false)} className={`block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${location.pathname.startsWith(link.to) ? 'bg-primary/10 text-primary' : 'text-muted-foreground'}`}>
                     {link.label}
                   </Link>
                 ))}
-                <Link to="/create-project" onClick={() => setMobileOpen(false)} className="block px-4 py-2.5 rounded-lg text-sm font-medium text-primary">Criar Projeto</Link>
+                <Link to="/create-project" onClick={() => setMobileOpen(false)} className="block px-4 py-2.5 rounded-lg text-sm font-medium text-primary">Criar Projecto</Link>
                 <Link to={`/profile/${user?.id}`} onClick={() => setMobileOpen(false)} className="block px-4 py-2.5 rounded-lg text-sm font-medium text-muted-foreground">Meu Perfil</Link>
               </>
             ) : (
