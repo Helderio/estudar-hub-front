@@ -38,7 +38,7 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
   const [form, setForm] = useState({
-    name: '', email: '', phone: '', password: '', confirmPassword: '',
+    name: '', username: '', email: '', phone: '', password: '', confirmPassword: '',
     institution: '', course: '', year: '', userType: 'student' as 'student' | 'professor',
     github: '', linkedin: '', bio: '', interestArea: '',
   });
