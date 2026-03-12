@@ -177,6 +177,17 @@ const Register = () => {
               {errors.name && <p className="text-xs text-destructive mt-1">{errors.name}</p>}
             </div>
             <div>
+              <label className="block text-sm font-medium text-foreground mb-1.5">Username</label>
+              <input
+                type="text"
+                value={form.username}
+                onChange={e => update('username', e.target.value)}
+                className={inputClass}
+                placeholder="ex: joaosilva123"
+              />
+              {errors.username && <p className="text-xs text-destructive mt-1">{errors.username}</p>}
+            </div>
+            <div>
               <label className="block text-sm font-medium text-foreground mb-1.5">Email</label>
               <input type="email" value={form.email} onChange={e => update('email', e.target.value)} className={inputClass} placeholder="seu@email.com" />
               {errors.email && <p className="text-xs text-destructive mt-1">{errors.email}</p>}
