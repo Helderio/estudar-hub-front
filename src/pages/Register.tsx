@@ -38,7 +38,7 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
   const [form, setForm] = useState({
-    name: '', email: '', phone: '', password: '', confirmPassword: '',
+    name: '', username: '', email: '', phone: '', password: '', confirmPassword: '',
     institution: '', course: '', year: '', userType: 'student' as 'student' | 'professor',
     github: '', linkedin: '', bio: '', interestArea: '',
   });
@@ -50,6 +50,8 @@ const Register = () => {
     const e: Record<string, string> = {};
     if (step === 0) {
       if (!form.name.trim()) e.name = 'Nome é obrigatório';
+      if (!form.username.trim()) e.username = 'Username é obrigatório';
+      else if (form.username.length < 3) e.username = 'Mínimo 3 caracteres';
       if (!form.email) e.email = 'Email é obrigatório';
       else if (!/\S+@\S+\.\S+/.test(form.email)) e.email = 'Email inválido';
       if (!form.phone) e.phone = 'Telefone é obrigatório';
@@ -173,6 +175,17 @@ const Register = () => {
               <label className="block text-sm font-medium text-foreground mb-1.5">Nome completo</label>
               <input type="text" value={form.name} onChange={e => update('name', e.target.value)} className={inputClass} placeholder="Seu nome completo" />
               {errors.name && <p className="text-xs text-destructive mt-1">{errors.name}</p>}
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-foreground mb-1.5">Username</label>
+              <input
+                type="text"
+                value={form.username}
+                onChange={e => update('username', e.target.value)}
+                className={inputClass}
+                placeholder="ex: joaosilva123"
+              />
+              {errors.username && <p className="text-xs text-destructive mt-1">{errors.username}</p>}
             </div>
             <div>
               <label className="block text-sm font-medium text-foreground mb-1.5">Email</label>
