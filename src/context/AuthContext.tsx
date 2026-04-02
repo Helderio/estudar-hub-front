@@ -27,7 +27,12 @@ const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(() => {
     const token = localStorage.getItem('token');
-    return token ? mockUsers[0] : null;
+    if (!token) return null;
+    const saved = localStorage.getItem('demo_user');
+    if (saved) {
+      try { return JSON.parse(saved); } catch { /* fall through */ }
+    }
+    return mockUsers[0];
   });
   const [isLoading, setIsLoading] = useState(false);
 
