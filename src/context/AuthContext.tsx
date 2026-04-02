@@ -76,6 +76,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       eventCount: 0,
     };
     localStorage.setItem('token', 'mock-jwt-token');
+    localStorage.setItem('demo_user', JSON.stringify(newUser));
     setUser(newUser);
     setIsLoading(false);
   }, []);
