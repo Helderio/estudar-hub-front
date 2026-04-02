@@ -6,6 +6,8 @@ import { ProjectCard } from '@/components/ProjectCard';
 import { SearchBar } from '@/components/SearchBar';
 import { RankBadge } from '@/components/RankBadge';
 import { EmptyState } from '@/components/EmptyState';
+import { DemoTour } from '@/components/DemoTour';
+import { useAuth } from '@/context/AuthContext';
 import type { Rank } from '@/types';
 import { PROJECT_CATEGORIES } from '@/types';
 
