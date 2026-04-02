@@ -9,40 +9,41 @@ const Profile = () => {
   const { id } = useParams();
   const { user: currentUser } = useAuth();
   const user = mockUsers.find(u => u.id === id) || mockUsers[0];
-  const userProjects = mockProjects.filter(p => p.author.id === user.id);
-  const userEvents = mockEvents.filter(e => e.participants.some(p => p.id === user.id));
-  const isOwnProfile = currentUser?.id === user.id;
+  const isOwnProfile = !id || currentUser?.id === user.id;
+  const resolvedUser = isOwnProfile && currentUser ? currentUser : user;
+  const userProjects = mockProjects.filter(p => p.author.id === resolvedUser.id);
+  const userEvents = mockEvents.filter(e => e.participants.some(p => p.id === resolvedUser.id));
 
   return (
     <div className="space-y-8 animate-fade-in max-w-4xl">
       {/* Profile header */}
       <div className="bg-card border border-border rounded-2xl p-6 md:p-8">
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
-          <div className="w-24 h-24 rounded-2xl bg-primary/10 flex items-center justify-center text-4xl font-display font-bold text-primary shrink-0">
-            {user.name.charAt(0)}
+           <div className="w-24 h-24 rounded-2xl bg-primary/10 flex items-center justify-center text-4xl font-display font-bold text-primary shrink-0">
+            {resolvedUser.name.charAt(0)}
           </div>
           <div className="text-center sm:text-left flex-1">
             <div className="flex items-center gap-3 justify-center sm:justify-start">
-              <h1 className="font-display text-2xl font-bold text-foreground">{user.name}</h1>
-              {user.userType === 'professor' && (
+              <h1 className="font-display text-2xl font-bold text-foreground">{resolvedUser.name}</h1>
+              {resolvedUser.userType === 'professor' && (
                 <span className="text-xs px-2 py-0.5 rounded-md bg-accent/10 text-accent font-medium">Professor</span>
               )}
             </div>
             <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 mt-2 text-sm text-muted-foreground">
-              <span className="flex items-center gap-1"><Building2 size={14} />{user.institution}</span>
-              {user.course && <span className="flex items-center gap-1"><GraduationCap size={14} />{user.course}</span>}
-              {user.year && <span className="text-xs bg-muted px-2 py-0.5 rounded">{user.year}</span>}
+              <span className="flex items-center gap-1"><Building2 size={14} />{resolvedUser.institution}</span>
+              {resolvedUser.course && <span className="flex items-center gap-1"><GraduationCap size={14} />{resolvedUser.course}</span>}
+              {resolvedUser.year && <span className="text-xs bg-muted px-2 py-0.5 rounded">{resolvedUser.year}</span>}
             </div>
-            {user.bio && <p className="mt-3 text-sm text-muted-foreground">{user.bio}</p>}
+            {resolvedUser.bio && <p className="mt-3 text-sm text-muted-foreground">{resolvedUser.bio}</p>}
             <div className="mt-3 flex items-center gap-3 justify-center sm:justify-start">
-              <RankBadge rank={user.rank} />
-              {user.github && (
-                <a href={user.github} target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors">
+              <RankBadge rank={resolvedUser.rank} />
+              {resolvedUser.github && (
+                <a href={resolvedUser.github} target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors">
                   <Github size={16} />
                 </a>
               )}
-              {user.linkedin && (
-                <a href={user.linkedin} target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors">
+              {resolvedUser.linkedin && (
+                <a href={resolvedUser.linkedin} target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors">
                   <Linkedin size={16} />
                 </a>
               )}
@@ -57,9 +58,9 @@ const Profile = () => {
 
         <div className="grid grid-cols-3 gap-4 mt-6 pt-6 border-t border-border">
           {[
-            { icon: FolderOpen, label: 'Projectos', value: user.projectCount },
-            { icon: CalendarDays, label: 'Eventos', value: user.eventCount },
-            { icon: Award, label: 'Rank', value: user.rank },
+            { icon: FolderOpen, label: 'Projectos', value: resolvedUser.projectCount },
+            { icon: CalendarDays, label: 'Eventos', value: resolvedUser.eventCount },
+            { icon: Award, label: 'Rank', value: resolvedUser.rank },
           ].map(stat => (
             <div key={stat.label} className="text-center">
               <stat.icon size={18} className="mx-auto text-primary mb-1" />

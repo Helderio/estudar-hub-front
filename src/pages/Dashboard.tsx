@@ -6,12 +6,16 @@ import { ProjectCard } from '@/components/ProjectCard';
 import { SearchBar } from '@/components/SearchBar';
 import { RankBadge } from '@/components/RankBadge';
 import { EmptyState } from '@/components/EmptyState';
+import { DemoTour } from '@/components/DemoTour';
+import { useAuth } from '@/context/AuthContext';
 import type { Rank } from '@/types';
 import { PROJECT_CATEGORIES } from '@/types';
 
 const ranks: Rank[] = ['E', 'D', 'C', 'B', 'A', 'S'];
 
 const Dashboard = () => {
+  const { user } = useAuth();
+  const firstName = user?.name?.split(' ')[0] ?? 'Estudante';
   const [search, setSearch] = useState('');
   const [selectedRank, setSelectedRank] = useState<Rank | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -29,11 +33,13 @@ const Dashboard = () => {
   return (
     <div className="space-y-6 animate-fade-in">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="font-display text-2xl font-bold text-foreground">Projectos</h1>
-          <p className="text-sm text-muted-foreground">Explore projectos académicos da comunidade.</p>
+        <div id="tour-greeting">
+          <h1 className="font-display text-2xl font-bold text-foreground">Olá, {firstName}! 👋</h1>
+          <p className="text-sm text-muted-foreground">
+            {user?.institution}{user?.course ? ` · ${user.course}` : ''}
+          </p>
         </div>
-        <Link to="/create-project" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl gradient-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity">
+        <Link id="tour-create-btn" to="/create-project" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl gradient-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity">
           <Plus size={16} /> Criar Projecto
         </Link>
       </div>
@@ -79,6 +85,8 @@ const Dashboard = () => {
       ) : (
         <EmptyState title="Nenhum projecto encontrado" description="Tente ajustar os filtros ou crie um novo projecto." />
       )}
+
+      <DemoTour />
     </div>
   );
 };

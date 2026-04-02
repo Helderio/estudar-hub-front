@@ -27,7 +27,12 @@ const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(() => {
     const token = localStorage.getItem('token');
-    return token ? mockUsers[0] : null;
+    if (!token) return null;
+    const saved = localStorage.getItem('demo_user');
+    if (saved) {
+      try { return JSON.parse(saved); } catch { /* fall through */ }
+    }
+    return mockUsers[0];
   });
   const [isLoading, setIsLoading] = useState(false);
 
@@ -71,12 +76,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       eventCount: 0,
     };
     localStorage.setItem('token', 'mock-jwt-token');
+    localStorage.setItem('demo_user', JSON.stringify(newUser));
     setUser(newUser);
     setIsLoading(false);
   }, []);
 
   const logout = useCallback(() => {
     localStorage.removeItem('token');
+    localStorage.removeItem('demo_user');
     setUser(null);
   }, []);
 
