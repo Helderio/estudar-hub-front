@@ -14,6 +14,8 @@ import { PROJECT_CATEGORIES } from '@/types';
 const ranks: Rank[] = ['E', 'D', 'C', 'B', 'A', 'S'];
 
 const Dashboard = () => {
+  const { user } = useAuth();
+  const firstName = user?.name?.split(' ')[0] ?? 'Estudante';
   const [search, setSearch] = useState('');
   const [selectedRank, setSelectedRank] = useState<Rank | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
