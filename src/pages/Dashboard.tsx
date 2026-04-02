@@ -85,6 +85,8 @@ const Dashboard = () => {
       ) : (
         <EmptyState title="Nenhum projecto encontrado" description="Tente ajustar os filtros ou crie um novo projecto." />
       )}
+
+      <DemoTour />
     </div>
   );
 };

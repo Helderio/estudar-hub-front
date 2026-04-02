@@ -83,6 +83,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const logout = useCallback(() => {
     localStorage.removeItem('token');
+    localStorage.removeItem('demo_user');
     setUser(null);
   }, []);
 

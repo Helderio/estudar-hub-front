@@ -9,9 +9,10 @@ const Profile = () => {
   const { id } = useParams();
   const { user: currentUser } = useAuth();
   const user = mockUsers.find(u => u.id === id) || mockUsers[0];
-  const userProjects = mockProjects.filter(p => p.author.id === user.id);
-  const userEvents = mockEvents.filter(e => e.participants.some(p => p.id === user.id));
-  const isOwnProfile = currentUser?.id === user.id;
+  const isOwnProfile = !id || currentUser?.id === user.id;
+  const resolvedUser = isOwnProfile && currentUser ? currentUser : user;
+  const userProjects = mockProjects.filter(p => p.author.id === resolvedUser.id);
+  const userEvents = mockEvents.filter(e => e.participants.some(p => p.id === resolvedUser.id));
 
   return (
     <div className="space-y-8 animate-fade-in max-w-4xl">
