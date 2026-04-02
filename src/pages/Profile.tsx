@@ -8,9 +8,9 @@ import { useAuth } from '@/context/AuthContext';
 const Profile = () => {
   const { id } = useParams();
   const { user: currentUser } = useAuth();
-  const user = mockUsers.find(u => u.id === id) || mockUsers[0];
-  const isOwnProfile = !id || currentUser?.id === user.id;
-  const resolvedUser = isOwnProfile && currentUser ? currentUser : user;
+  const isOwnProfile = !id || id === currentUser?.id;
+  const mockUser = mockUsers.find(u => u.id === id);
+  const resolvedUser = isOwnProfile && currentUser ? currentUser : (mockUser || mockUsers[0]);
   const userProjects = mockProjects.filter(p => p.author.id === resolvedUser.id);
   const userEvents = mockEvents.filter(e => e.participants.some(p => p.id === resolvedUser.id));
 
