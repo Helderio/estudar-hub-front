@@ -33,9 +33,11 @@ const Dashboard = () => {
   return (
     <div className="space-y-6 animate-fade-in">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="font-display text-2xl font-bold text-foreground">Projectos</h1>
-          <p className="text-sm text-muted-foreground">Explore projectos académicos da comunidade.</p>
+        <div id="tour-greeting">
+          <h1 className="font-display text-2xl font-bold text-foreground">Olá, {firstName}! 👋</h1>
+          <p className="text-sm text-muted-foreground">
+            {user?.institution}{user?.course ? ` · ${user.course}` : ''}
+          </p>
         </div>
         <Link to="/create-project" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl gradient-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity">
           <Plus size={16} /> Criar Projecto
