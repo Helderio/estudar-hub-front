@@ -58,9 +58,9 @@ const Profile = () => {
 
         <div className="grid grid-cols-3 gap-4 mt-6 pt-6 border-t border-border">
           {[
-            { icon: FolderOpen, label: 'Projectos', value: user.projectCount },
-            { icon: CalendarDays, label: 'Eventos', value: user.eventCount },
-            { icon: Award, label: 'Rank', value: user.rank },
+            { icon: FolderOpen, label: 'Projectos', value: resolvedUser.projectCount },
+            { icon: CalendarDays, label: 'Eventos', value: resolvedUser.eventCount },
+            { icon: Award, label: 'Rank', value: resolvedUser.rank },
           ].map(stat => (
             <div key={stat.label} className="text-center">
               <stat.icon size={18} className="mx-auto text-primary mb-1" />

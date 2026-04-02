@@ -39,7 +39,7 @@ const Dashboard = () => {
             {user?.institution}{user?.course ? ` · ${user.course}` : ''}
           </p>
         </div>
-        <Link to="/create-project" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl gradient-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity">
+        <Link id="tour-create-btn" to="/create-project" className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl gradient-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity">
           <Plus size={16} /> Criar Projecto
         </Link>
       </div>
